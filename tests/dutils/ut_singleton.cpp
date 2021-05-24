@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 ~ 2017 Deepin Technology Co., Ltd.
+ * Copyright (C) 2016 ~ 2017 Deepin Technology Co., Ltd.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,27 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#include "ut_singleton.h"
 
-#include <QObject>
+#include <QDebug>
+#include <QThread>
 
-class TestDUtil: public QObject
+Singleton::Singleton(QObject *parent) : QObject(parent)
 {
-    Q_OBJECT
+    qDebug() << "Singleton Init Begin" << this;
+    QThread::sleep(3);
+    qDebug() << "Singleton Init End" << this;
+}
 
-private Q_SLOTS:
-    void testLogPath();
-    void testPathChange();
-    void testDSingleton();
-    void testTimeFormatter();
-    void testTimeFormatterList();
-    void testDiskFormatter();
-    void testDiskFormatterList();
-    void testDiskFormatter1024();
-    void testDBusSender();
+void Singleton::test()
+{
+    qDebug() << "test" << this;
+}
 
-    void testGroups();
-    void testSysInfo();
-};
+MultiSingletonTester::MultiSingletonTester(QObject *parent) : QObject(parent)
+{
+}
 
-
+void MultiSingletonTester::run()
+{
+    Singleton::instance()->test();
+}

@@ -4,6 +4,9 @@ QT += xml
 CONFIG += link_pkgconfig
 TARGET = dtkcore
 
+# 龙芯架构上没有默认添加PT_GNU_STACK-section,所以此处手动指定一下
+contains(QMAKE_HOST.arch, mips.*): QMAKE_LFLAGS_SHLIB += "-Wl,-z,noexecstack"
+
 INCLUDEPATH += $$PWD
 HEADERS += $$PWD/dtkcore_global.h \
     dsysinfo.h \
@@ -48,7 +51,7 @@ include(dtk_cmake.prf)
 #qt module
 include(dtk_module.prf)
 
-prf.files+= $$PWD/*.prf ../dtk_build_config.prf
+prf.files+= $$PWD/*.prf ../dtk_build_config.prf ../tests/dtk_testcase.prf
 
 isEmpty(MKSPECS_INSTALL_DIR) {
     MKSPECS_INSTALL_DIR=$$[QT_INSTALL_ARCHDATA]/mkspecs

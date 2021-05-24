@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 ~ 2017 Deepin Technology Co., Ltd.
+ * Copyright (C) 2017 ~ 2017 Deepin Technology Co., Ltd.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,28 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "singletontester.h"
+#pragma once
 
-#include <QDebug>
-#include <QThread>
+#include <gtest/gtest.h>
 
-Singleton::Singleton(QObject *parent) : QObject(parent)
+class gts_DUtil : public testing::Test
 {
-    qDebug() << "Singleton Init Begin" << this;
-    QThread::sleep(3);
-    qDebug() << "Singleton Init End" << this;
-}
+protected:
+    static void SetUpTestCase();
+    static void TearDownTestCase();
+    virtual void SetUp();
+    virtual void TearDown();
+};
 
-void Singleton::test()
-{
-    qDebug() << "test" << this;
-}
 
-MultiSingletonTester::MultiSingletonTester(QObject *parent) : QObject(parent)
-{
-}
-
-void MultiSingletonTester::run()
-{
-    Singleton::instance()->test();
-}
