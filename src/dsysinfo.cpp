@@ -1027,8 +1027,12 @@ qint64 DSysInfo::memoryTotalSize()
 {
 #ifdef Q_OS_LINUX
     siGlobal->memoryAvailableSize = get_phys_pages() * sysconf(_SC_PAGESIZE);
+    qWarning() << "get_phys_pages:" << get_phys_pages();
+    qWarning() << "sysconf:" << sysconf(_SC_PAGESIZE);
+    qWarning() << "memoryAvailableSize:" << siGlobal->memoryAvailableSize;
     return siGlobal->memoryAvailableSize;
 #endif
+    qWarning() << "!Q_OS_LINUX";
     return -1;
 }
 
