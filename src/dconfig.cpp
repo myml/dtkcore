@@ -379,7 +379,7 @@ DConfigBackend *DConfigPrivate::getOrCreateBackend()
     }
 #ifndef D_DISABLE_DCONFIG
 #ifndef D_DISABLE_DBUS_CONFIG
-    if (DBusBackend::isServiceRegistered()) {
+    if (DBusBackend::isServiceRegistered() && true) {
         qCDebug(cfLog, "Fallback to DBus mode");
         backend.reset(new DBusBackend(this));
     } else {
