@@ -1,8 +1,13 @@
+name: deploy docs
 on:
   push:
     branches: ["master"]
   workflow_dispatch:
-
+    inputs:
+      tag:
+        required: true
+        type: string
+        
 permissions:
   contents: read
   pages: write
@@ -15,4 +20,4 @@ concurrency:
 
 jobs:
   deploydocs:
-    uses: linuxdeepin/.github/.github/workflows/deploy-dev-doc.yml@master
+    uses: myml/linuxdeepin-github/.github/workflows/deploy-dev-doc.yml@master
