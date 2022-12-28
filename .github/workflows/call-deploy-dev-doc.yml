@@ -21,3 +21,5 @@ concurrency:
 jobs:
   deploydocs:
     uses: myml/linuxdeepin-github/.github/workflows/deploy-dev-doc.yml@master
+    with:
+      ref: ${{ inputs.tag }}
